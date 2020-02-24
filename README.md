@@ -44,10 +44,15 @@ URLSession vs URLSession with Builder Pattern vs AlamoFire
     기복적으로 protocol을 정의하는 것 부터 시작합니다. protocol에는 
 
     `session`: URLSession
+    
     `request`: URLRequest
+    
     `init(url:method:)` : 필수적으로 정의해야하는 것들을 우선적으로 정의합니다.
+    
     `setHeader(header: [String: String]) -> RequestProtocol` : header를 정의합니다.
+    
     `setBody(body: [String: Any]) -> RequestProtocol`: body를 정의합니다.
+    
     `build(completionHanlder: @escaping (Data?, URLResponse?, Error?) -> Void)` : 지금 까지 정의되었던 상태를 바탕으로 url에 요청을 합니다.
 
     추상화된 protocol을 실제 구현하는 `class Request: RequestProtocol` 를 정의합니다.
