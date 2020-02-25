@@ -9,68 +9,61 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var vm: ContentViewModel = ContentViewModel()
     
     var body: some View {
-        
-        Button(action: self.urlcall){
-            Text("call")
+        List{
+//            Button(action: self.urlcall){
+//                Text("call")
+//            }
+            Button(action: self.get){
+                Text("get")
+            }
+            Button(action: self.get2){
+                Text("get2")
+            }
+            Button(action: self.post){
+                Text("post")
+            }
+            Button(action: self.put){
+                Text("put")
+            }
+            Button(action: self.patch){
+                Text("patch")
+            }
+            Button(action: self.delete){
+                Text("delete")
+            }
         }
+        
     }
     
     func urlcall(){
-        let google: URL = URL(string: "https://google.com")!
-        let post: URL = URL(string: "https://httpbin.org/post")!
-//        // URLSession
-//        let request: Request = Request()
-//        let body: NSMutableDictionary = NSMutableDictionary()
-//
-//        try request.get(url: url, completionHandler: { data, response, error in
-//            if error == nil{
-//                print(data!)
-//                print(response!)
-//            }else{
-//                print("error!")
-//            }
-//
-//        })
+//        self.vm.postMethod()
+    }
+    
+    func get(){
+        self.vm.get_alamofire()
+    }
+    
+    func get2(){
+        self.vm.get2_alamofire()
+    }
+    
+    func post(){
+        self.vm.post_alamofire()
         
-        // URLSession with design pattern
-        var header: Dictionary<String, String> = Dictionary<String, String>()
-        header["application/json"] = "Content-Type"
-        
-        //get
-        Request(url: google, method: .get)
-            .setHeader(header: header)
-            .build(completionHanlder: { (data, res, err) in
-                if err == nil{
-                    print("data: \(data!)")
-                    print("response: \(res!)")
-                }else{
-                    print(err!)
-                }
-            })
-        
-        //post
-        header["application/json"] = "Accept"
-        var body: [String: Any] = [String: Any]()
-        body["name"] = "wimes"
-        Request(url: post, method: .post)
-            .setHeader(header: header)
-            .setBody(body: body)
-            .build { (data, res, err) in
-                if err == nil{
-                    do{
-
-                        let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                        print("data: \(json)")
-                    }catch{
-                        print(error)
-                    }
-                    print("response: \(res!)")
-                }else{
-                    print(err!)
-                }
-                
-        }
+    }
+    
+    func put(){
+        self.vm.put_alamofire()
+    }
+    
+    func patch(){
+        self.vm.patch_alamofire()
+    }
+    
+    func delete(){
+        self.vm.delete_alamofire()
     }
 }

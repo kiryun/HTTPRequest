@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,8 +14,11 @@
 		04292FEB23FFCFCE008C1F83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04292FEA23FFCFCE008C1F83 /* Preview Assets.xcassets */; };
 		04292FEE23FFCFCE008C1F83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04292FEC23FFCFCE008C1F83 /* LaunchScreen.storyboard */; };
 		04292FF823FFD7A6008C1F83 /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04292FF723FFD7A6008C1F83 /* URLSessionClient.swift */; };
-		04292FFA23FFD7B1008C1F83 /* AlamoFireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04292FF923FFD7B1008C1F83 /* AlamoFireClient.swift */; };
+		043B67712404BEA70002C4DE /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B67702404BEA70002C4DE /* UserData.swift */; };
+		82136CD824057B9B00BBC1DE /* AlamofireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82136CD724057B9B00BBC1DE /* AlamofireClient.swift */; };
+		82136CDA24057C0900BBC1DE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82136CD924057C0900BBC1DE /* Config.swift */; };
 		82D842EF24027D0700CAC50B /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D842EE24027D0700CAC50B /* ContentViewModel.swift */; };
+		9C8B66A2547A023F3ED0012E /* Pods_HttpRequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85576DBC49156D3321CB8F34 /* Pods_HttpRequest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +31,13 @@
 		04292FED23FFCFCE008C1F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04292FEF23FFCFCE008C1F83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04292FF723FFD7A6008C1F83 /* URLSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClient.swift; sourceTree = "<group>"; };
-		04292FF923FFD7B1008C1F83 /* AlamoFireClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamoFireClient.swift; sourceTree = "<group>"; };
+		043B67702404BEA70002C4DE /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		6503DC86B66E2A9AA07F92E3 /* Pods-HttpRequest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HttpRequest.release.xcconfig"; path = "Target Support Files/Pods-HttpRequest/Pods-HttpRequest.release.xcconfig"; sourceTree = "<group>"; };
+		82136CD724057B9B00BBC1DE /* AlamofireClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlamofireClient.swift; path = HttpRequest/HTTPClient/AlamofireClient.swift; sourceTree = SOURCE_ROOT; };
+		82136CD924057C0900BBC1DE /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Models/Config.swift; sourceTree = "<group>"; };
 		82D842EE24027D0700CAC50B /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		85576DBC49156D3321CB8F34 /* Pods_HttpRequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HttpRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3AA680C7DF0E11A90D369FA /* Pods-HttpRequest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HttpRequest.debug.xcconfig"; path = "Target Support Files/Pods-HttpRequest/Pods-HttpRequest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C8B66A2547A023F3ED0012E /* Pods_HttpRequest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +57,8 @@
 			children = (
 				04292FE023FFCFCD008C1F83 /* HttpRequest */,
 				04292FDF23FFCFCD008C1F83 /* Products */,
+				EA649A3A94BA2A4A3AF2AFAD /* Pods */,
+				DF7C345405CC6867E1911351 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,14 +73,16 @@
 		04292FE023FFCFCD008C1F83 /* HttpRequest */ = {
 			isa = PBXGroup;
 			children = (
-				82D842ED24027CD300CAC50B /* HTTPClient */,
+				04292FE923FFCFCE008C1F83 /* Preview Content */,
+				04292FEF23FFCFCE008C1F83 /* Info.plist */,
+				04292FEC23FFCFCE008C1F83 /* LaunchScreen.storyboard */,
+				04292FE723FFCFCE008C1F83 /* Assets.xcassets */,
 				82D842EC24027CBD00CAC50B /* Delegates */,
+				82D842ED24027CD300CAC50B /* HTTPClient */,
+				82136CD624057B0D00BBC1DE /* Models */,
 				04292FE523FFCFCD008C1F83 /* ContentView.swift */,
 				82D842EE24027D0700CAC50B /* ContentViewModel.swift */,
-				04292FE723FFCFCE008C1F83 /* Assets.xcassets */,
-				04292FEC23FFCFCE008C1F83 /* LaunchScreen.storyboard */,
-				04292FEF23FFCFCE008C1F83 /* Info.plist */,
-				04292FE923FFCFCE008C1F83 /* Preview Content */,
+				82136CD924057C0900BBC1DE /* Config.swift */,
 			);
 			path = HttpRequest;
 			sourceTree = "<group>";
@@ -80,6 +93,14 @@
 				04292FEA23FFCFCE008C1F83 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		82136CD624057B0D00BBC1DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				043B67702404BEA70002C4DE /* UserData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		82D842EC24027CBD00CAC50B /* Delegates */ = {
@@ -95,9 +116,26 @@
 			isa = PBXGroup;
 			children = (
 				04292FF723FFD7A6008C1F83 /* URLSessionClient.swift */,
-				04292FF923FFD7B1008C1F83 /* AlamoFireClient.swift */,
+				82136CD724057B9B00BBC1DE /* AlamofireClient.swift */,
 			);
 			path = HTTPClient;
+			sourceTree = "<group>";
+		};
+		DF7C345405CC6867E1911351 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85576DBC49156D3321CB8F34 /* Pods_HttpRequest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA649A3A94BA2A4A3AF2AFAD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3AA680C7DF0E11A90D369FA /* Pods-HttpRequest.debug.xcconfig */,
+				6503DC86B66E2A9AA07F92E3 /* Pods-HttpRequest.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,9 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04292FF223FFCFCE008C1F83 /* Build configuration list for PBXNativeTarget "HttpRequest" */;
 			buildPhases = (
+				35D25E0C32C481D1E3A839BB /* [CP] Check Pods Manifest.lock */,
 				04292FDA23FFCFCD008C1F83 /* Sources */,
 				04292FDB23FFCFCD008C1F83 /* Frameworks */,
 				04292FDC23FFCFCD008C1F83 /* Resources */,
+				02ED77FE54028CC726F6969F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,15 +206,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02ED77FE54028CC726F6969F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HttpRequest/Pods-HttpRequest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HttpRequest/Pods-HttpRequest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HttpRequest/Pods-HttpRequest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		35D25E0C32C481D1E3A839BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HttpRequest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04292FDA23FFCFCD008C1F83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04292FFA23FFD7B1008C1F83 /* AlamoFireClient.swift in Sources */,
 				04292FE223FFCFCD008C1F83 /* AppDelegate.swift in Sources */,
+				82136CD824057B9B00BBC1DE /* AlamofireClient.swift in Sources */,
+				043B67712404BEA70002C4DE /* UserData.swift in Sources */,
 				82D842EF24027D0700CAC50B /* ContentViewModel.swift in Sources */,
 				04292FE423FFCFCD008C1F83 /* SceneDelegate.swift in Sources */,
+				82136CDA24057C0900BBC1DE /* Config.swift in Sources */,
 				04292FE623FFCFCD008C1F83 /* ContentView.swift in Sources */,
 				04292FF823FFD7A6008C1F83 /* URLSessionClient.swift in Sources */,
 			);
@@ -310,6 +394,7 @@
 		};
 		04292FF323FFCFCE008C1F83 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3AA680C7DF0E11A90D369FA /* Pods-HttpRequest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -330,6 +415,7 @@
 		};
 		04292FF423FFCFCE008C1F83 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6503DC86B66E2A9AA07F92E3 /* Pods-HttpRequest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
