@@ -19,6 +19,7 @@ struct Config{
     //PUT    /posts/1
     //PATCH    /posts/1
     //DELETE    /posts/1
-    static let baseURL = "https://jsonplaceholder.typicode.com"
+//    static let baseURL = "https://jsonplaceholder.typicode.com"
+    static let baseURL: String = "https://httpbin.org"
     
 }

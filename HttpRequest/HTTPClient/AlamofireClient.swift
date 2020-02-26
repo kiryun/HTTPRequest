@@ -23,75 +23,84 @@ class AlamofireClient{
         
     }
     
-    func get(completionHandler: @escaping (Result<[UserData], AFError>)->Void){
-        self.request = AF.request("\(Config.baseURL)/posts")
-        self.request?.responseDecodable(completionHandler: { (res: DataResponse<[UserData], AFError>) in
-            switch res.result{
-            case .success(let userDatas):
-                completionHandler(.success(userDatas))
-            case .failure(let err):
-                completionHandler(.failure(err))
-            }
-        })
+    func get(completionHandler: @escaping (AFDataResponse<Data?>) -> Void){
+        AF.request("\(Config.baseURL)/get").response(completionHandler: completionHandler)
     }
+    
+    func postUsingParam(completionHandler: @escaping (AFDataResponse<Data?>) -> Void){
+        struct Login: Encodable{
+            let email: String
+            let pssword: String
+        }
+        
+        let login = Login(email: "test@test.test", pssword: "testPassword")
+        
+        AF.request("\(Config.baseURL)/post",
+            method: .post,
+            parameters: login,
+            encoder: JSONParameterEncoder.default)
+            .response(completionHandler: completionHandler)
+    }
+    
+    
+    func postJSONParam(completionHandler: @escaping (AFDataResponse<Data?>) -> Void){
+        let parameters: [String: [String]] = [
+            "foo": ["bar"],
+            "baz": ["a", "b"],
+            "qux": ["x", "y", "z"]
+        ]
+
+        //post json default
+        AF.request("\(Config.baseURL)/post", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).response(completionHandler: completionHandler)
+        
+        //post json prettyPrinted
+        AF.request("\(Config.baseURL)/post", method: .post, parameters: parameters, encoder: JSONParameterEncoder.prettyPrinted).response(completionHandler: completionHandler)
+        
+        //post json sortedKeys
+        AF.request("\(Config.baseURL)/post", method: .post, parameters: parameters, encoder: JSONParameterEncoder.sortedKeys)
+            .response(completionHandler: completionHandler)
+        
+
+        // HTTP body: {"baz":["a","b"],"foo":["bar"],"qux":["x","y","z"]}
+    }
+    
+    func httpHeader(completionHandler: @escaping (AFDataResponse<Any>) -> Void){
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Basic VXNlcm5hbWU6UGFzc3dvcmQ=",
+//            "Accept": "application/json"
+//        ]
+        
+        //아래와 같이 headers를 초기화해도 된다.
+        let headers: HTTPHeaders = [
+            .authorization(username: "Username", password: "Password"),
+            .accept("application/json")
+        ]
+        
+        AF.request("\(Config.baseURL)/headers", headers: headers).responseJSON(completionHandler: completionHandler)
+        
+    }
+    
+    
+    func responseData(completionHandler: @escaping (AFDataResponse<Data>) -> Void){
+        print("responseData")
+//        struct Login: Encodable{
+//            let email: String
+//            let password: String
+//        }
+        let login = Login(email: "test@test.test", password: "testPassword")
+        
+        AF.request("\(Config.baseURL)/post",
+            method: .post,
+            parameters: login,
+            encoder: JSONParameterEncoder.default)
+        .responseData(completionHandler: completionHandler)
+    }
+    
     
     func get2(completionHandler: @escaping (AFDataResponse<Data>) -> Void){
         let param: Parameters = ["userId": 1]
         self.request = AF.request("\(Config.baseURL)/posts", method: .get, parameters: param, encoding: URLEncoding.default)
         self.request?.responseData(completionHandler: completionHandler)
-    }
-    
-    func post(completionHandler: @escaping (Result<[UserData], AFError>) -> Void){
-        let userData = PostUserData()
-        self.request = AF.request("\(Config.baseURL)/posts", method: .post, parameters: userData)
-        self.request?.responseDecodable(completionHandler: { (res: DataResponse<PostUserData, AFError>) in
-            switch res.result{
-            case .success(let userData):
-                completionHandler(.success([userData.toUserData()]))
-            case .failure(let err):
-                completionHandler(.failure(err))
-            }
-        })
-    }
-    
-    func put(completionHandler: @escaping (Result<[UserData], AFError>) -> Void){
-        let userData = PostUserData(id: 1)
-        self.request = AF.request("\(Config.baseURL)/posts/1", method: .put, parameters: userData)
-        self.request?.responseDecodable(completionHandler: { (res: DataResponse<PostUserData, AFError>) in
-            switch res.result{
-            case .success(let userData):
-                completionHandler(.success([userData.toUserData()]))
-            case .failure(let err):
-                completionHandler(.failure(err))
-            }
-        })
-    }
-    
-    func patch(completionHandler: @escaping (Result<[UserData], AFError>) -> Void){
-        let userData = PostUserData(id: 1)
-        self.request = AF.request("\(Config.baseURL)/posts/1", method: .patch, parameters: userData)
-        self.request?.responseDecodable(completionHandler: { (res: DataResponse<PatchUserData, AFError>) in
-            switch res.result{
-            case .success(let userData):
-                completionHandler(.success([userData.toUserData()]))
-            case .failure(let err):
-                completionHandler(.failure(err))
-            }
-        })
-        
-    }
-    
-    func delete(completionHandler: @escaping (Result<[UserData], AFError>) -> Void){
-        self.request = AF.request("\(Config.baseURL)/posts/1", method: .delete)
-        self.request?.response(completionHandler: { res in
-            switch res.result{
-            case .success:
-                completionHandler(.success([UserData(userId: -1, id: -1, title: "DELETE", body: "SUCCESS")]))
-            case .failure(let err):
-                completionHandler(.failure(err))
-            }
-        })
-        
     }
     
 }

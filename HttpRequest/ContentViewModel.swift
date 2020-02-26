@@ -66,72 +66,51 @@ class ContentViewModel: ObservableObject{
     //Alamofire
     func get_alamofire(){
         AlamofireClient.shared.get(completionHandler: { res in
-            switch res{
-            case .success:
-                print(res)
-            case .failure(let err):
-                print(err)
-            }
+            debugPrint(res)
         })
     }
     
-    func get2_alamofire(){
-        AlamofireClient.shared.get2(completionHandler: { res in
+    func postParam_alamofire(){
+        AlamofireClient.shared.postUsingParam(completionHandler: { res in
+//            debugPrint(res)
             switch res.result{
-            case .success:
-                do{
-                    let json = try JSONSerialization.jsonObject(with: res.data!, options: [])
-                    print("data: \(json)")
-                }catch{
-                    print(error)
+            case .success(let data):
+                if let jsonData = String(data: data!, encoding: .utf8){
+                    print("jsondata:\n\(jsonData)")
                 }
-            case let .failure(err):
+            case .failure(let err):
+                print("err발생")
                 print(err)
             }
         })
     }
     
-    func post_alamofire(){
-        AlamofireClient.shared.post(completionHandler: { res in
-            switch res{
-            case .success:
-                print(res)
-            case .failure(let err):
-                print(err)
-            }
-        })
+    func postJSONParam_alamofire(){
+        AlamofireClient.shared.postJSONParam { res in
+            debugPrint(res)
+        }
     }
     
-    func put_alamofire(){
-        AlamofireClient.shared.put(completionHandler: { res in
-            switch res{
-            case .success:
-                print(res)
-            case .failure(let err):
-                print(err)
-            }
-        })
+    func httpHeader_alamofire(){
+        AlamofireClient.shared.httpHeader { res in
+            debugPrint(res)
+        }
     }
     
-    func patch_alamofire(){
-        AlamofireClient.shared.patch(completionHandler: { res in
-            switch res{
-            case .success:
-                print(res)
+    func responseData_alamofire(){
+        
+        AlamofireClient.shared.responseData { res in
+            switch res.result{
+            case .success(let data):
+                if let jsonString = String(data: data, encoding: .utf8){
+                    if let jsonDict: [String: Any] = jsonStringToDictionary(jsonString: jsonString){
+                        print(jsonDict)
+                    }
+                }
             case .failure(let err):
+                print("err발생")
                 print(err)
             }
-        })
-    }
-    
-    func delete_alamofire(){
-        AlamofireClient.shared.delete(completionHandler: { res in
-            switch res{
-            case .success:
-                print(res)
-            case .failure(let err):
-                print(err)
-            }
-        })
+        }
     }
 }

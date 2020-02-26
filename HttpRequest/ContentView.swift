@@ -19,21 +19,33 @@ struct ContentView: View {
             Button(action: self.get){
                 Text("get")
             }
-            Button(action: self.get2){
-                Text("get2")
+            Button(action: self.postParam){
+                Text("postParam")
             }
-            Button(action: self.post){
-                Text("post")
+            Button(action: self.postJSONParam){
+                Text("postJSONParam")
             }
-            Button(action: self.put){
-                Text("put")
+            Button(action: self.httpHeader){
+                Text("httpHeader")
             }
-            Button(action: self.patch){
-                Text("patch")
+            Button(action: self.responseData){
+                Text("responseData")
             }
-            Button(action: self.delete){
-                Text("delete")
-            }
+//            Button(action: self.get2){
+//                Text("get2")
+//            }
+//            Button(action: self.post){
+//                Text("post")
+//            }
+//            Button(action: self.put){
+//                Text("put")
+//            }
+//            Button(action: self.patch){
+//                Text("patch")
+//            }
+//            Button(action: self.delete){
+//                Text("delete")
+//            }
         }
         
     }
@@ -46,24 +58,19 @@ struct ContentView: View {
         self.vm.get_alamofire()
     }
     
-    func get2(){
-        self.vm.get2_alamofire()
+    func postParam(){
+        self.vm.postParam_alamofire()
     }
     
-    func post(){
-        self.vm.post_alamofire()
-        
+    func postJSONParam(){
+        self.vm.postJSONParam_alamofire()
     }
     
-    func put(){
-        self.vm.put_alamofire()
+    func httpHeader(){
+        self.vm.httpHeader_alamofire()
     }
     
-    func patch(){
-        self.vm.patch_alamofire()
-    }
-    
-    func delete(){
-        self.vm.delete_alamofire()
+    func responseData(){
+        self.vm.responseData_alamofire()
     }
 }
