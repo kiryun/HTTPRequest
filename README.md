@@ -113,7 +113,7 @@ URLSession vs URLSession with Builder Pattern vs AlamoFire
     * https://stackoverflow.com/questions/41997641/how-to-make-nsurlsession-post-request-in-swift
     * https://stackoverflow.com/questions/31937686/how-to-make-http-post-request-with-json-body-in-swift
     
-    ## Alamofire
+## Alamofire
 
 ### Request
 
