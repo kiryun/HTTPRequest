@@ -102,13 +102,17 @@ URLSession vs URLSession with Builder Pattern vs AlamoFire
 
     이처럼 builder pattern을 이용하면 생성 절차도 한눈에 볼 수 있으며 코딩을 할 때 보다 직관적으로 할 수 있다는 장점이 있습니다.
 
-  * Code
+## Promise
 
-    https://github.com/kiryun/HTTPRequest/tree/972103b9342a29a2301324d9d0dd713984756378
+Promise를 적용했습니다.
 
-  * Reference
+Promise의 전반적인 내용은 [여기](https://github.com/kiryun/Promise) 를 참고하시길 바랍니다.
 
-    * https://linsaeng.tistory.com/7?category=753322
-    * https://theswiftdev.com/swift-builder-design-pattern/
-    * https://stackoverflow.com/questions/41997641/how-to-make-nsurlsession-post-request-in-swift
-    * https://stackoverflow.com/questions/31937686/how-to-make-http-post-request-with-json-body-in-swift
+[Server](https://github.com/kiryun/dummy_article)는 node.js를 사용했으며 localhost:3000에서 동작합니다.
+
+## References
+
+* https://linsaeng.tistory.com/7?category=753322
+* https://theswiftdev.com/swift-builder-design-pattern/
+* https://stackoverflow.com/questions/41997641/how-to-make-nsurlsession-post-request-in-swift
+* https://stackoverflow.com/questions/31937686/how-to-make-http-post-request-with-json-body-in-swift

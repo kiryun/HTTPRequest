@@ -10,107 +10,85 @@ import Foundation
 import WebKit
 
 class ContentViewModel: ObservableObject{
+    let apiClient: APIClient = APIClient()
+    
+    var dict: [String:Any] = [String:Any]()
+}
 
-    // URLSession non builder pattern
-//    func getGoogle(){
-//        guard let google: URL = URL(string: "https://google.com") else{
-//            return
-//        }
-//
-//        let request: Request = Request()
-//        let body: NSMutableDictionary = NSMutableDictionary()
-//
-//        try request.get(url: google, completionHandler: { data, response, error in
-//            if error == nil{
-//                print(data!)
-//                print(response!)
-//            }else{
-//                print("error!")
-//            }
-//        })
-//    }
-
-    // URLSession with design pattern
-//    func postMethod(){
-//        guard let url: URL = URL(string: "https://httpbin.org/post")else{
-//            return
-//        }
-//
-//        var header: Dictionary<String, String> = Dictionary<String, String>()
-//        header["application/json"] = "Content-Type"
-//
-//
-//        //post
-//        header["application/json"] = "Accept"
-//        var body: [String: Any] = [String: Any]()
-//        body["name"] = "wimes"
-//        Request(url: url, method: .post)
-//            .setHeader(header: header)
-//            .setBody(body: body)
-//            .build { (data, res, err) in
-//                if err == nil{
-//                    do{
-//
-//                        let json = try JSONSerialization.jsonObject(with: data!, options: [])
-//                        print("data: \(json)")
-//                    }catch{
-//                        print(error)
+extension ContentViewModel{
+    
+//    func request(){
+//        print("request")
+//        let url: URL = URL(string: "\(Config.baseURL)/get")!
+//        self.apiClient.get(url: url)
+//            .onSuccess { data in
+//                if let jsonString = String(data: data, encoding: .utf8){
+//                    if let dict = jsonStringToDictionary(jsonString: jsonString){
+//                        print(dict)
+//                        self.dict = dict
+//                        print(self.dict)
+//                        //doSomething
 //                    }
-//                    print("response: \(res!)")
-//                }else{
-//                    print(err!)
 //                }
 //        }
+//        .onFailure { error in
+//            print("wimesApp: \(error.localizedDescription)")
+//        }
 //    }
     
-    //Alamofire
-    func get_alamofire(){
-        AlamofireClient.shared.get(completionHandler: { res in
-            debugPrint(res)
-        })
-    }
-    
-    func postParam_alamofire(){
-        AlamofireClient.shared.postUsingParam(completionHandler: { res in
-//            debugPrint(res)
-            switch res.result{
-            case .success(let data):
-                if let jsonData = String(data: data!, encoding: .utf8){
-                    print("jsondata:\n\(jsonData)")
-                }
-            case .failure(let err):
-                print("err발생")
-                print(err)
-            }
-        })
-    }
-    
-    func postJSONParam_alamofire(){
-        AlamofireClient.shared.postJSONParam { res in
-            debugPrint(res)
-        }
-    }
-    
-    func httpHeader_alamofire(){
-        AlamofireClient.shared.httpHeader { res in
-            debugPrint(res)
-        }
-    }
-    
-    func responseData_alamofire(){
+    //using promise
+    func startApp_promise(){
+        print("startApp_promise")
         
-        AlamofireClient.shared.responseData { res in
-            switch res.result{
-            case .success(let data):
-                if let jsonString = String(data: data, encoding: .utf8){
-                    if let jsonDict: [String: Any] = jsonStringToDictionary(jsonString: jsonString){
-                        print(jsonDict)
+        let loginURL: URL = URL(string: "\(Config.baseURL)/user/logIn")!
+        let articlesURL: URL = URL(string: "\(Config.baseURL)/article/articles")!
+        
+        let loginBody: NSMutableDictionary = NSMutableDictionary()
+        loginBody["email"] = "test@gmail.com"
+        loginBody["password"] = "test"
+        print(loginBody)
+        
+//        let body: NSMutableDictionary = NSMutableDictionary()
+//        body["u_id"] = 1
+//        self.apiClient.post(url: articlesURL, body: body)
+//            .onSuccess { data in
+//                if
+//        }
+        
+//        //login 시도
+        self.apiClient.post(url: loginURL, body: loginBody)
+            //login 성공시
+            .then{ loginData -> Promise<Data> in
+                print("login success")
+                let articleBody: NSMutableDictionary = NSMutableDictionary()
+
+                if let jsonString = String(data: loginData, encoding: .utf8){
+                    if let dict = jsonStringToDictionary(jsonString: jsonString){
+                        articleBody["u_id"] = dict["id"]
                     }
                 }
-            case .failure(let err):
-                print("err발생")
-                print(err)
+                print(articleBody)
+                //article을 받아오기 시전
+                return self.apiClient.post(url: articlesURL, body: articleBody)
             }
-        }
+            //article 받기 성공
+            .onSuccess { data in
+                print("article success")
+                //출력
+                if let jsonString = String(data: data, encoding: .utf8){
+                    if let dict = jsonStringToDictionary(jsonString: jsonString){
+                        print(dict)
+                    }
+                }
+            }
+            .onFailure { error in
+                print(error)
+            }
+        
+    }
+    
+    //using dispatchQueue
+    func startApp_() {
+        
     }
 }
