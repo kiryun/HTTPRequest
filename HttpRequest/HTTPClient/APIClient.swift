@@ -51,6 +51,7 @@ class APIClient{
     let session: URLSession = URLSession.shared
     
     //GET
+    //iOS에서는 GET method에 body를 넣을 수 없다. 참고 할 것.
     func get(url: URL) -> Promise<Data>{
         var request: URLRequest = URLRequest(url: url)
         
@@ -64,20 +65,22 @@ class APIClient{
     }
     
     //POST
-    func post(url: URL, body: NSMutableDictionary) -> Promise<Data> {
+    func post(url: URL, body: NSMutableDictionary?) -> Promise<Data> {
         print("APIClient.post")
         var request: URLRequest = URLRequest(url: url)
-        
+
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        do{
-            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
-        }
-        catch{
-            print("APIClient.post: \(error)")
-        }
         
+        if let body = body{
+            do{
+                request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
+            }
+            catch{
+                print("APIClient.post: \(error)")
+            }
+        }
         return self.session.dataTask(with: request)
     }
     
