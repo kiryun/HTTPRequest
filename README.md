@@ -110,6 +110,14 @@ Promise의 전반적인 내용은 [여기](https://github.com/kiryun/Promise) �
 
 [Server](https://github.com/kiryun/dummy_article)는 node.js를 사용했으며 localhost:3000에서 동작합니다.
 
+## UnitTest
+
+UnitTest를 적용했습니다.
+
+UnitTest에 대한 내용은 [여기](https://velog.io/@wimes/UnitTest-for-Xcode) 를 참고하시길 바랍니다.
+
+마찬가지로 [Server](https://github.com/kiryun/dummy_article)는 node.js를 사용했으며 localhost:3000에서 동작합니다.
+
 ## References
 
 * https://linsaeng.tistory.com/7?category=753322
