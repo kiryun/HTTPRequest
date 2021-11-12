@@ -118,7 +118,7 @@ UnitTest에 대한 내용은 [여기](https://velog.io/@wimes/UnitTest-for-Xcode
 
 마찬가지로 [Server](https://github.com/kiryun/dummy_article)는 node.js를 사용했으며 localhost:3000에서 동작합니다.
 
-## References
+## Reference
 
 * https://linsaeng.tistory.com/7?category=753322
 * https://theswiftdev.com/swift-builder-design-pattern/
